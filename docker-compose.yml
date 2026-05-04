@@ -5,6 +5,8 @@ services:
     environment:
       DISPLAY: "${DISPLAY}"
       MPLCONFIGDIR: "/tmp"
+      IP: "172.16.0.3"
+      PORT: "5005"
     devices:
       - "/dev/video0:/dev/video0"
     volumes:

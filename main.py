@@ -1,9 +1,9 @@
 import mediapipe as mp
-import cv2, socket, time
+import cv2, socket, time, os
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-windows_ip = "172.16.0.3"
-udp_port = 5005
+ip = os.getenv("IP")
+udp_port = int(os.getenv("PORT"))
 cooldown = 1.0
 last_action_time = 0
 
@@ -65,12 +65,12 @@ while True:
         if current_time - last_action_time > cooldown:
             if is_page_down:
                 print('Sending: Page Down')
-                sock.sendto(b"PGDN", (windows_ip, udp_port))
+                sock.sendto(b"PGDN", (ip, udp_port))
                 last_action_time = current_time
 
             elif is_page_up:
                 print('Sending: Page Up')
-                sock.sendto(b"PGUP", (windows_ip, udp_port))
+                sock.sendto(b"PGUP", (ip, udp_port))
                 last_action_time = current_time
 
     last_landmark_list = current_landmark_list
